@@ -6,6 +6,8 @@ HEADER_LENGTH = 10
 client_socket = None
 
 # Connects to the server
+
+
 def connect(ip, port, my_username, error_callback):
 
     global client_socket
@@ -32,6 +34,8 @@ def connect(ip, port, my_username, error_callback):
     return True
 
 # Sends a message to the server
+
+
 def send(message):
     # Encode message to bytes, prepare header and convert to bytes, like for username above, then send
     message = message.encode('utf-8')
@@ -41,10 +45,15 @@ def send(message):
 # Starts listening function in a thread
 # incoming_message_callback - callback to be called when new message arrives
 # error_callback - callback to be called on error
+
+
 def start_listening(incoming_message_callback, error_callback):
-    Thread(target=listen, args=(incoming_message_callback, error_callback), daemon=True).start()
+    Thread(target=listen, args=(incoming_message_callback,
+                                error_callback), daemon=True).start()
 
 # Listens for incomming messages
+
+
 def listen(incoming_message_callback, error_callback):
     while True:
 
