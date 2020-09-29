@@ -33,6 +33,13 @@ class User:
         except Exception as x:
             print(x)
 
+    # TODO: CONTINUAR IMPLEMENTACAO
+    def load_friends(self):
+        try:
+            pass
+        except Exception as x:
+            print(x)
+
     def create_user(self):
         try:
             self._private_key = rsa.generate_private_key(
