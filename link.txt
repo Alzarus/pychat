@@ -1,1 +1,7 @@
+https://pythonprogramming.net/introduction-kivy-application-python-tutorial/
+
+https://pythonprogramming.net/sockets-tutorial-python-3/
+
+https://nitratine.net/blog/post/asymmetric-encryption-and-decryption-in-python/
+
 https://medium.com/swlh/lets-write-a-chat-app-in-python-f6783a9ac170
