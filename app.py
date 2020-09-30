@@ -1,5 +1,5 @@
 import kivy
-from kivy.app import App
+from kivy.app import App, app
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
@@ -68,6 +68,7 @@ class ConnectPage(GridLayout):
     # (second parameter is the time after which this function had been called,
     #  we don't care about it, but kivy sends it, so we have to receive it)
     def connect(self, _):
+        global app_user
 
         # Get information for sockets client
         port = int(self.port.text)
@@ -80,7 +81,7 @@ class ConnectPage(GridLayout):
         # Create chat page and activate it
         chat_app.create_chat_page()
         chat_app.screen_manager.current = 'Chat'
-        instance_user = user.User(username)
+        app_user = user.User(username)
 
 
 # This class is an improved version of Label
@@ -185,6 +186,7 @@ class ChatPage(GridLayout):
     # Gets called when either Send button or Enter key is being pressed
     # (kivy passes button object here as well, but we don;t care about it)
     def send_message(self, _):
+        global app_user
 
         # Get message text and clear message input field
         message = self.new_message.text
@@ -195,7 +197,15 @@ class ChatPage(GridLayout):
             # Our messages - use red color for the name
             self.history.update_chat_history(
                 f'[color=dd2020]{chat_app.connect_page.username.text}[/color] > {message}')
-            socket_client.send(message)
+            # TODO: CONTINUAR
+            if app_user.get_name().lower() == 'tom':
+                friend_name = 'Jerry'
+            else:
+                friend_name = 'Tom'
+
+            socket_client.send(app_user.encrypt_message(
+                app_user.get_friend_public_key(friend_name), message))
+            # socket_client.send(message)
 
         # As mentioned above, we have to shedule for refocusing to input field
         Clock.schedule_once(self.focus_text_input, 0.1)
@@ -207,9 +217,14 @@ class ChatPage(GridLayout):
 
     # Passed to sockets client, get's called on new message
     def incoming_message(self, username, message):
+        global app_user
+
         # Update chat history with username and message, green color for username
+        # TODO: CONTINUAR
         self.history.update_chat_history(
-            f'[color=20dd20]{username}[/color] > {message}')
+            f'[color=20dd20]{username}[/color] > {app_user.decrypt(message)}')
+        # self.history.update_chat_history(
+        # f'[color=20dd20]{username}[/color] > {message}')
 
 
 # Simple information/error page

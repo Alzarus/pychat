@@ -123,6 +123,8 @@ class User:
     def get_public_key(self):
         return self._public_key
 
+    def get_name(self):
+        return self._name
 
 def validate_users_folder():
     try:
