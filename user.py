@@ -21,22 +21,32 @@ class User:
         try:
             with open(f'./users_folder/{self._name}.pem', mode='r') as user_file:
                 if os.stat(f'./users_folder/{self._name}.pem').st_size != 0:
+                    data = user_file.readlines().split('\n')
                     self._private_key = serialization.load_pem_private_key(
-                        user_file.read(),
+                        data[0],
                         password=None,
                         backend=default_backend()
                     )
-                    self._public_key = self._private_key.public_key()
+                    self._public_key = public_key = serialization.load_pem_public_key(
+                        data[1],
+                        backend=default_backend()
+                    )
                 else:
                     self.create_user()
 
         except Exception as x:
             print(x)
 
-    # TODO: CONTINUAR IMPLEMENTACAO
     def load_friends(self):
         try:
-            pass
+            with open(f'/users_folder/{self._name}_friends.pem') as friends_file:
+                if os.stat(f'./users_folder/{self._name}.pem').st_size != 0:
+                    for line in friends_file:
+                        friend_data = line.split(',')
+                        name = friend_data[0]
+                        public_key = friend_data[1]
+                        self.friends[name] = public_key
+
         except Exception as x:
             print(x)
 
@@ -48,20 +58,26 @@ class User:
                 backend=default_backend()
             )
             self._public_key = self._private_key.public_key()
-            self.store_data(self._private_key)
+            self.store_data(self._private_key, self._public_key)
 
         except Exception as x:
             print(x)
 
-    def store_data(self, private_key):
+    def store_data(self, private_key, public_key):
         try:
-            pem = private_key.private_bytes(
+            pem_private = private_key.private_bytes(
                 encoding=serialization.Encoding.PEM,
                 format=serialization.PrivateFormat.PKCS8,
                 encryption_algorithm=serialization.NoEncryption()
             )
+
+            pem_public = public_key.public_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PublicFormat.SubjectPublicKeyInfo
+            )
             with open(f'./users_folder/{self._name}.pem', 'wb') as f:
-                f.write(pem)
+                f.write(pem_private + '\n')
+                f.write(pem_public)
 
         except Exception as x:
             print(x)
