@@ -126,6 +126,7 @@ class User:
     def get_name(self):
         return self._name
 
+
 def validate_users_folder():
     try:
         if not os.path.exists('./users_folder'):
