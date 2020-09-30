@@ -10,10 +10,13 @@ import socket_client
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.uix.scrollview import ScrollView
+import user
 import sys
 
 
 kivy.require("1.10.1")
+
+app_user = None
 
 
 class ConnectPage(GridLayout):
@@ -77,6 +80,7 @@ class ConnectPage(GridLayout):
         # Create chat page and activate it
         chat_app.create_chat_page()
         chat_app.screen_manager.current = 'Chat'
+        instance_user = user.User(username)
 
 
 # This class is an improved version of Label

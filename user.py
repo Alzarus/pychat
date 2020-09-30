@@ -50,6 +50,14 @@ class User:
         except Exception as x:
             print(x)
 
+    def get_friend_public_key(self, friend_name):
+        try:
+            for name, public_key in self._friends.items():
+                if friend_name in name:
+                    return public_key
+        except Exception as x:
+            print(x)
+
     def create_user(self):
         try:
             self._private_key = rsa.generate_private_key(
