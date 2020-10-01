@@ -1,3 +1,20 @@
 CRIAR VIRTUAL ENV E COLOCAR AS DEPENDENCIAS DO KIVY
 CONTINUAR IMPLEMENTAÇÃO -> APP.PY (TODO)
+    RESOLVER BUG
+CONSERTAR METODO LOAD_FRIENDS()
 CRIAR README COM GIFS
+
+
+ File "C:\Users\pedro\Desktop\FACUL-2019.2-REMOTO\redes2\pychat\socket_client.py", line 88, in listen
+     raise e
+   File "C:\Users\pedro\Desktop\FACUL-2019.2-REMOTO\redes2\pychat\socket_client.py", line 83, in listen
+     incoming_message_callback(username, message)
+   File "app.py", line 225, in incoming_message
+     f'[color=20dd20]{username}[/color] > {app_user.decrypt_message(message)}')
+   File "C:\Users\pedro\Desktop\FACUL-2019.2-REMOTO\redes2\pychat\user.py", line 140, in decrypt_message
+     raise x
+   File "C:\Users\pedro\Desktop\FACUL-2019.2-REMOTO\redes2\pychat\user.py", line 129, in decrypt_message
+     original_message = self._private_key.decrypt(
+   File "C:\Python38\lib\site-packages\cryptography\hazmat\backends\openssl\rsa.py", line 346, in decrypt
+     raise ValueError("Ciphertext length must be equal to key size.")
+ ValueError: Ciphertext length must be equal to key size.

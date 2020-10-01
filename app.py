@@ -1,5 +1,5 @@
 import kivy
-from kivy.app import App, app
+from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
@@ -79,9 +79,9 @@ class ConnectPage(GridLayout):
             return
 
         # Create chat page and activate it
+        app_user = user.User(username)
         chat_app.create_chat_page()
         chat_app.screen_manager.current = 'Chat'
-        app_user = user.User(username)
 
 
 # This class is an improved version of Label
@@ -222,7 +222,7 @@ class ChatPage(GridLayout):
         # Update chat history with username and message, green color for username
         # TODO: CONTINUAR
         self.history.update_chat_history(
-            f'[color=20dd20]{username}[/color] > {app_user.decrypt(message)}')
+            f'[color=20dd20]{username}[/color] > {app_user.decrypt_message(message)}')
         # self.history.update_chat_history(
         # f'[color=20dd20]{username}[/color] > {message}')
 

@@ -37,8 +37,9 @@ def connect(ip, port, my_username, error_callback):
 
 
 def send(message):
+    # TODO: REVER
     # Encode message to bytes, prepare header and convert to bytes, like for username above, then send
-    message = message.encode('utf-8')
+    message = str(message).encode('utf-8')
     message_header = f"{len(message):<{HEADER_LENGTH}}".encode('utf-8')
     client_socket.send(message_header + message)
 
@@ -85,3 +86,4 @@ def listen(incoming_message_callback, error_callback):
         except Exception as e:
             # Any other exception - something happened, exit
             error_callback('Reading error: {}'.format(str(e)))
+            raise e
