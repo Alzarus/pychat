@@ -1,7 +1,7 @@
-import os
-
 import hashlib
 import onetimepad
+import os
+# https://www.tutorialspoint.com/cryptography_with_python/cryptography_with_python_implementation_of_one_time_pad_cipher.htm
 
 
 class UserOneTimePad:
