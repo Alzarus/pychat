@@ -1,3 +1,4 @@
+import base64
 import kivy
 from kivy.app import App
 from kivy.uix.label import Label
@@ -10,7 +11,9 @@ import socket_client
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.uix.scrollview import ScrollView
-import user
+# import user
+# import user_crypto
+import user_onetimepad
 import sys
 
 
@@ -79,7 +82,10 @@ class ConnectPage(GridLayout):
             return
 
         # Create chat page and activate it
-        app_user = user.User(username)
+        # TODO:ALTERAR AQUI
+        # app_user = user.User(username)
+        # app_user = user_crypto.UserCrypto(username)
+        app_user = user_onetimepad.UserOneTimePad(username)
         chat_app.create_chat_page()
         chat_app.screen_manager.current = 'Chat'
 
@@ -198,13 +204,18 @@ class ChatPage(GridLayout):
             self.history.update_chat_history(
                 f'[color=dd2020]{chat_app.connect_page.username.text}[/color] > {message}')
             # TODO: CONTINUAR
-            if app_user.get_name().lower() == 'tom':
-                friend_name = 'Jerry'
-            else:
-                friend_name = 'Tom'
+            # if app_user.get_name().lower() == 'tom':
+            #     friend_name = 'Jerry'
+            # else:
+            #     friend_name = 'Tom'
+            # if app_user.get_name().lower() == 'adao':
+            #     friend_name = 'eva'
+            # else:
+            #     friend_name = 'adao'
 
-            socket_client.send(app_user.encrypt_message(
-                app_user.get_friend_public_key(friend_name), message))
+            # socket_client.send(app_user.encrypt_message(
+            #     app_user.get_friend_public_key(friend_name), message))
+            socket_client.send(app_user.encrypt_message(message))
             # socket_client.send(message)
 
         # As mentioned above, we have to shedule for refocusing to input field
@@ -221,6 +232,9 @@ class ChatPage(GridLayout):
 
         # Update chat history with username and message, green color for username
         # TODO: CONTINUAR
+        # message_bytes = base64.b64decode(message)
+        # message = message_bytes.decode('ascii')
+
         self.history.update_chat_history(
             f'[color=20dd20]{username}[/color] > {app_user.decrypt_message(message)}')
         # self.history.update_chat_history(

@@ -1,0 +1,35 @@
+message = 5752
+<class 'str'>
+msg = aa
+<class 'str'>
+'str' object has no attribute 'decode'
+message = 5352
+<class 'str'>
+msg = ea
+<class 'str'>
+message = 595a4d19075d0a13
+<class 'str'>
+msg = oi, amor
+<class 'str'>
+message = 47
+message = 47
+<class 'str'>
+<class 'str'>
+msg = q
+msg = q
+<class 'str'>
+<class 'str'>
+message = 5143410e4713475c0a45075b55591856020e5243
+<class 'str'>
+<class 'str'>
+msg = gp 7!#"=='ebmi-f57d!
+msg = gp 7!#"=='ebmi-f57d!
+<class 'str'>
+<class 'str'>
+message = 5947004b0f5f450a5c0909
+<class 'str'>
+<class 'str'>
+msg = otario kkkk
+msg = mw5*=lv388o
+<class 'str'>
+<class 'str'>

@@ -1,5 +1,5 @@
+import base64
 import socket
-import errno
 from threading import Thread
 
 HEADER_LENGTH = 10
@@ -79,11 +79,22 @@ def listen(incoming_message_callback, error_callback):
                 message_header = client_socket.recv(HEADER_LENGTH)
                 message_length = int(message_header.decode('utf-8').strip())
                 message = client_socket.recv(message_length).decode('utf-8')
+                # print_data(f'FROM SOCKET_CLIENT-> {message}')
+
+                # TODO: REVISAR
+                # message_bytes = message.encode('ascii')
+                # base64_bytes = base64.b64encode(message_bytes)
 
                 # Print message
                 incoming_message_callback(username, message)
+                # incoming_message_callback(username, base64_bytes)
 
         except Exception as e:
             # Any other exception - something happened, exit
             error_callback('Reading error: {}'.format(str(e)))
             raise e
+
+
+def print_data(message):
+    with open('./output.txt', 'a+') as file:
+        file.write(f"{message}\n")
