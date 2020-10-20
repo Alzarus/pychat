@@ -37,7 +37,6 @@ def connect(ip, port, my_username, error_callback):
 
 
 def send(message):
-    # TODO: REVER
     # Encode message to bytes, prepare header and convert to bytes, like for username above, then send
     message = str(message).encode('utf-8')
     message_header = f"{len(message):<{HEADER_LENGTH}}".encode('utf-8')
@@ -80,10 +79,6 @@ def listen(incoming_message_callback, error_callback):
                 message_length = int(message_header.decode('utf-8').strip())
                 message = client_socket.recv(message_length).decode('utf-8')
                 # print_data(f'FROM SOCKET_CLIENT-> {message}')
-
-                # TODO: REVISAR
-                # message_bytes = message.encode('ascii')
-                # base64_bytes = base64.b64encode(message_bytes)
 
                 # Print message
                 incoming_message_callback(username, message)

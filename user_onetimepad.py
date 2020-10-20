@@ -46,7 +46,6 @@ class UserOneTimePad:
             raise x
 
     def encrypt_message(self, message):
-        # TODO: REVER
         try:
             ciphertext = onetimepad.encrypt(message, self._key)
             return ciphertext
@@ -55,13 +54,8 @@ class UserOneTimePad:
             raise x
 
     def decrypt_message(self, message):
-        # TODO: REVER
         try:
             msg = onetimepad.decrypt(message, self._key)
-            print_data(f"message = {message}")
-            print_data(f"{type(message)}")
-            print_data(f"msg = {msg}")
-            print_data(f"{type(msg)}")
             return msg
 
         except Exception as x:
