@@ -32,6 +32,6 @@ pytz==2020.1
 pywin32==228
 six==1.15.0
 toml==0.10.1
-urllib3==1.25.10
+urllib3==1.26.18
 virtualenv==20.0.31
 wrapt==1.12.1
